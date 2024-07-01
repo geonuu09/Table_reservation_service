@@ -29,6 +29,6 @@ public class User extends BaseEntity {
 
 
 }
-enum UserRole {
+public enum UserRole {
     ROLE_USER, ROLE_PARTNER
 }

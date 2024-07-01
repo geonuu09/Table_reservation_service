@@ -2,6 +2,7 @@ package com.project.tablereservationsys.service;
 
 import com.project.tablereservationsys.domain.Store;
 import com.project.tablereservationsys.domain.User;
+import com.project.tablereservationsys.domain.UserRole;
 import com.project.tablereservationsys.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class StoreService {
     private final UserService userService;
 
     public Store createStore(Store store) {
+        User partner = store.getPartner();
+        if(partner == null || partner.getRole() != UserRole.ROLE_PARTNER) {
+            throw new RuntimeException("Only Partner can Create Store");
+        }
         return storeRepository.save(store);
     }
 
